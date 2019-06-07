@@ -22,7 +22,7 @@ mysample = args.samplename
 # open vcf file
 vcffile = pysam.VariantFile(args.vcffile)
 # open bam file
-samfile = pysam.AlignmentFile(args.cramfile,"rc")
+samfile = pysam.AlignmentFile(args.cramfile,"rc",reference_filename=args.reference)
 # open reffasta
 fa = pysam.FastaFile(args.reference)
 
@@ -43,8 +43,9 @@ for rec in vcffile.fetch():
 
     # if the variant is a substitution
     if len(rec.ref) == len(rec.alts[0]) and len(rec.ref) == 1:
-        
-        for pileup in samfile.pileup(rec.contig, rec.pos-1, rec.pos):            
+
+        for pileup in samfile.pileup(rec.contig, rec.pos-1, rec.pos):
+
             if pileup.pos == rec.pos-1: # only consider the variant position
 
                 for read in pileup.pileups:
@@ -72,7 +73,8 @@ for rec in vcffile.fetch():
         else: # if insertion
             altseq = altseq + rec.alts[0] + fa.fetch(rec.contig,rec.pos,rec.pos+window)
 
-        for pileup in samfile.pileup(rec.contig, rec.pos-1, rec.pos):
+        pu = samfile.pileup(rec.contig, rec.pos-1, rec.pos, multiple_iterators = False)
+        for pileup in pu:
             if pileup.pos == rec.pos-1:
                 for read in pileup.pileups:
 
