@@ -44,7 +44,7 @@ RUN cd /opt/ && \
     make && \
     cp bin/* /usr/local/bin/
 
-RUN Rscript -e "source('https://bioconductor.org/biocLite.R'); biocLite('HMMcopy'); biocLite('GenomeInfoDb'); install.packages(c('devtools','optparse'))"
+RUN Rscript -e "install.packages(c('devtools','optparse')); BiocManager::install(c('HMMcopy','GenomeInfoDb'))"
 RUN Rscript --default-packages=devtools -e "install_github('broadinstitute/ichorCNA')"
 RUN cd /opt/ && wget https://github.com/broadinstitute/ichorCNA/archive/master.zip && \
        unzip master.zip && mv ichorCNA-master/scripts/*.R /usr/local/bin/ && rm -Rf master.zip ichorCNA-master
