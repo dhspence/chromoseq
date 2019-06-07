@@ -110,7 +110,7 @@ RUN cd /opt/ && unzip /tmp/${maven_package_name}-bin.zip \
 #
 
 RUN conda config --add channels r && conda config --add channels bioconda && conda install -c conda-forge petl && \
-    conda install -c anaconda biopython && conda install -c anaconda scipy && conda install pysam
+    conda install -c anaconda biopython && conda install -c anaconda scipy
 
 #
 # blat
