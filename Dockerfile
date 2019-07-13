@@ -8,6 +8,6 @@ LABEL description="Heavy container for Chromoseq"
 # Octopus
 ###############
 
-RUN conda install -y -c conda-forge -c bioconda octopus
+RUN conda install -y -c conda-forge -c bioconda libxgboost libgcc boost octopus
 
 
