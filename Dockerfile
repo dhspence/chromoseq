@@ -8,6 +8,7 @@ LABEL description="Heavy container for Chromoseq"
 # Octopus
 ###############
 
-RUN conda install -y -c conda-forge -c bioconda libxgboost libgcc boost octopus
-
-
+WORKDIR /opt/
+RUN git clone -b develop https://github.com/luntergroup/octopus.git && \
+    octopus/scripts/install.py --install-dependencies --download-forests && \
+    echo 'export PATH='$(pwd)'/octopus/bin:$PATH'
