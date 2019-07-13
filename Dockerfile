@@ -80,7 +80,7 @@ RUN ln -s /opt/pindel-0.2.5b8/pindel /usr/local/bin/pindel && \
 # Octopus
 ###############
 
-#RUN conda install -y -c conda-forge -c bioconda octopus
+RUN conda install -y -c conda-forge -c bioconda octopus
 
 #
 # GATK
